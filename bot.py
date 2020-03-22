@@ -6,7 +6,8 @@ import requests
 from bs4 import BeautifulSoup
 
 update_id = None
-
+countries = 'China\nItaly\nUSA\nSpain\nGermany\nIran\nFrance\nS. Korea\nSwitzerland\nUK\nNetherlands\nAustria\nBelgium\nNorway\nSweden\nCanada\nDenmark\nAustralia\nPortugal\nMalaysia\nBrazil\nJapan\nCzechia\nTurkey\nIsrael\nIreland\nDiamond Princess\nLuxembourg\nPakistan\nThailand\nChile\nPoland\nEcuador\nGreece\nFinland\nQatar\nIceland\nIndonesia\nSingapore\nSaudi Arabia\nSlovenia\nPhilippines\nRomania\nIndia\nPeru\nBahrain\nRussia\nEstonia\nEgypt\nHong Kong\nMexico\nPanama\nSouth Africa\nLebanon\nArgentina\nIraq\nColombia\nCroatia\nArmenia\nSerbia\nSlovakia\nKuwait\nBulgaria\nSan Marino\nTaiwan\nUAE\nAlgeria\nUruguay\nHungary\nLatvia\nCosta Rica\nDominican Republic\nLithuania\nJordan\nMorocco\nVietnam\nBosnia and Herzegovina\nFaeroe Islands\nAndorra\nNorth Macedonia\nCyprus\nBrunei \nMoldova\nSri Lanka\nAlbania\nBelarus\nMalta\nVenezuela\nNew Zealand\nBurkina Faso\nTunisia\nGuadeloupe\nSenegal\nGeorgia\nKazakhstan\nAzerbaijan\nCambodia\nPalestine\nOman\nTrinidad and Tobago\nUkraine\nRéunion\nUzbekistan\nCameroon\nMartinique\nLiechtenstein\nChannel Islands\nHonduras\nBangladesh\nAfghanistan\nDRC\nParaguay\nNigeria\nCuba\nGhana\nPuerto Rico\nJamaica\nMacao\nBolivia\nGuyana\nMonaco\nFrench Guiana\nGuatemala\nRwanda\nMontenegro\nTogo\nFrench Polynesia\nGuam\nMauritius\nBarbados\nIvory Coast\nKyrgyzstan\nMaldives\nMayotte\nGibraltar\nMongolia\nEthiopia\nAruba\nKenya\nSeychelles\nEquatorial Guinea\nTanzania\nU.S. Virgin Islands\nGabon\nSaint Martin\nSuriname\nBahamas\nNew Caledonia\nEswatini\nCayman Islands\nCuraçao\nCabo Verde\nCAR\nCongo\nEl Salvador\nLiberia\nMadagascar\nNamibia\nSt. Barth\nZimbabwe\nSudan\nAngola\nBenin\nBermuda\nBhutan\nFiji\nGreenland\nGuinea\nHaiti\nIsle of Man\nMauritania\nNicaragua\nSaint Lucia\nZambia\nNepal\nAntigua and Barbuda\nChad\nDjibouti\nEritrea\nGambia\nVatican City\nMontserrat\nNiger\nPapua New Guinea\nSt. Vincent Grenadines\nSint Maarten\nSomalia\nTimor-Leste\nUganda'
+instructions = "Enter 'info' to get summary of the world.\nEnter 'country <country name>' for Country-Wise Info.\nEnter 'list' to get list of available countries."
 def main():
     global update_id
     bot = telegram.Bot('TOKEN')
@@ -35,10 +36,12 @@ def echo(bot):
         if update.message:
             if update.message.text.lower() == "info":
                 update.message.reply_text(info())
-            elif update.message.text.lower().split(" ")[0] == "country":
-                update.message.reply_text(data(update.message.text.split(" ")[1]))
+            elif update.message.text.lower().split(" ",1)[0] == "country":
+                update.message.reply_text(data(update.message.text.split(" ",1)[1]))
+            elif update.message.text.lower() == "list":
+                update.message.reply_text(countries)
             else:
-                update.message.reply_text("Enter 'info' to get summary or 'country <country name>' for Country-Wise Info" )
+                update.message.reply_text(instructions)
 
 def data(country):
     i = 0
